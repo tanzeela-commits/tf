@@ -1,0 +1,12 @@
+proflie..... save button,upload file,update form,update profile picture,name icon,cancel button //all set waiting for api but tmri dost short hogi
+registeration....open app on click register btn //done
+settings..... dlt notification part //done
+my posts... double post, delete btn, update btn //update btn done //delete btn done  !!!double post wala bhnda is still pending
+find jobs.... category field,apply btn, double post , create a post form,dlt on refresh,back on click,cancel btn,update btn application btn //pending
+
+
+/pull lena ka bjy push krdia now this is not allow me to push any thing from vs code Updates were rejected because the tip of your current branch is behind
+ 
+
+
+ //new repo banani pari is ma kuch mt krna
