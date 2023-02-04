@@ -63,7 +63,7 @@ const Update =
 
     async function editUserDetails() {
       try {
-        const check = await axios.put(`http://localhost:5000/post/${id}`, formData, {
+        const check = await axios.put(`https://bbuttshopjob.herokuapp.com/post/${id}`, formData, {
           headers: {
             Authorization: `Bearer ${JWTtoken}`,
           },

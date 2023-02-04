@@ -71,7 +71,7 @@ export default function PostCard({ post }) {
   async function applyjob() {
     try {
       const check = await axios.post(
-        "http://localhost:5000/applyjob",
+        "https://bbuttshopjob.herokuapp.com/applyjob",
         //  {"receiverEmail": "abc13@gmail.com",},
         // post,
         { receiverEmail, name, email, address, qualification, dob, city, phoneno },
@@ -106,7 +106,7 @@ export default function PostCard({ post }) {
             <Avatar
               sx={{ bgcolor: "primary" }}
               aria-label="user-Pic"
-              src={`http://localhost:5000/${userpic}`}
+              src={`https://bbuttshopjob.herokuapp.com/${userpic}`}
               alt={username}
             />
           ) : (
@@ -232,7 +232,7 @@ export default function PostCard({ post }) {
       <CardMedia
         component="img"
         height="254"
-        image={`http://localhost:5000/${post.postimg}`}
+        image={`https://bbuttshopjob.herokuapp.com/${post.postimg}`}
         alt={shopname}
       />
 

@@ -85,7 +85,7 @@ export const SettingsPassword = (props) => {
 
   async function changePass(body) {
     try {
-      const response = await fetch("http://localhost:5000/settings/changepass", {
+      const response = await fetch("https://bbuttshopjob.herokuapp.com/settings/changepass", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

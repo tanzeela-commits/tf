@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import LoginFormModal from '../../views/loginForm/LoginFormModel'
+import LoginFormModal from "../../views/loginForm/LoginFormModel";
 // mui imports
 import {
   Box,
@@ -20,7 +20,7 @@ import { useState } from "react";
 import DateInput from "../../components/common/menu/dateInput";
 import { bodyStreamToNodeStream } from "next/dist/server/body-streams";
 import { Route } from "@mui/icons-material";
-import axios from 'axios'
+import axios from "axios";
 
 const Register = () => {
   const router = useRouter();
@@ -35,30 +35,25 @@ const Register = () => {
   const [qualification, setQualification] = useState("");
   const [dob, setDob] = useState("");
   const [userimg, setuserimg] = useState("");
-  const formData = new FormData()
-  formData.append("userimg",userimg)
-  formData.append("name",name)
-  formData.append("email",email)
-  formData.append("password",password)
-  formData.append("cpassword",cpassword)
-  formData.append("city",city)
-  formData.append("address",address)
-  formData.append("phoneno",phoneno)
-  formData.append("qualification",qualification)
-  formData.append("dob",dob)
+  const formData = new FormData();
+  formData.append("userimg", userimg);
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("cpassword", cpassword);
+  formData.append("city", city);
+  formData.append("address", address);
+  formData.append("phoneno", phoneno);
+  formData.append("qualification", qualification);
+  formData.append("dob", dob);
 
   async function register() {
-  
     try {
-      const check = await axios.post(
-        "http://localhost:5000/register",
-     formData,
-     
-        );
-        console.log(check)
-        alert('User Registered')
-        setIsLoginFormOpen(true);
-        // router.push(`/my_posts`)
+      const check = await axios.post("https://bbuttshopjob.herokuapp.com/register", formData);
+      console.log(check);
+      alert("User Registered");
+      setIsLoginFormOpen(true);
+      // router.push(`/my_posts`)
       // navigate("/session-timed-out");
       // console.log(sendForm);
     } catch (error) {
@@ -197,7 +192,7 @@ const Register = () => {
               </Typography>
             </Box>
             <input type="file" onChange={(e) => setuserimg(e.target.files[0])} />
-            <Button fullWidth variant="contained"  onClick={register}>
+            <Button fullWidth variant="contained" onClick={register}>
               Register
             </Button>
             <Typography color="textSecondary" variant="body2">

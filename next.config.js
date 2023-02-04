@@ -1,5 +1,8 @@
 module.exports = {
-  reactStrictMode: true
+  reactStrictMode: true,
+};
+module.exports = {
+  distDir: "build",
 };
 module.exports={
 distDir:"build",
