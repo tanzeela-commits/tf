@@ -26,7 +26,7 @@ import {
   // Button,
   // Stack,
 } from "@mui/material";
-const Post = ({handleClose}) => {
+const Post = ({ handleClose }) => {
   const [jobname, setjobname] = useState("");
   const [shopname, setshopname] = useState("");
   const [shoploc, setshoploc] = useState("");
@@ -39,14 +39,14 @@ const Post = ({handleClose}) => {
   const [experience, setexperience] = useState("");
   const [description, setdescription] = useState("");
   // const JWTtoken = window.localStorage.getItem("JWTtoken");/
-  const formData = new FormData()
-  formData.append("postimg",postimg)
-  formData.append("jobname",jobname)
-  formData.append("shopname",shopname)
-  formData.append("shoploc",shoploc)
-  formData.append("workersReq",workersReq)
-  formData.append("salary",salary)
-  formData.append("timing",timing)
+  const formData = new FormData();
+  formData.append("postimg", postimg);
+  formData.append("jobname", jobname);
+  formData.append("shopname", shopname);
+  formData.append("shoploc", shoploc);
+  formData.append("workersReq", workersReq);
+  formData.append("salary", salary);
+  formData.append("timing", timing);
   const style = {
     position: "absolute",
     top: "50%",
@@ -58,35 +58,36 @@ const Post = ({handleClose}) => {
     overflowY: "auto",
     boxShadow: 24,
     borderRadius: 1,
+    padding: "50px",
     p: 4,
   };
   const [showModal, setShowModal] = useState(false);
- async function openModal() {
+  async function openModal() {
     setShowModal(true);
-}
-async function update() {
-  // if(!postimg||!jobname||!shopname||!shoploc||!workersReq||!salary||!timing)
-  // {
-  //   alert("please fill the fields")
-  // }
-  // else{
-  //   alert("record updated successfully")
-  //   router.push(`/jobs`)
-  // }
-  try {
-    const check = await axios.put(
-      `http://localhost:5000/post/63c1d744ac421a216d8ef7d7`,
-   formData,
-   config,
-      );
-      console.log(check)
-    // navigate("/session-timed-out");
-    // console.log(sendForm);
-  } catch (error) {
-    console.log("Error", error);
   }
-}
-  const router = useRouter()
+  async function update() {
+    // if(!postimg||!jobname||!shopname||!shoploc||!workersReq||!salary||!timing)
+    // {
+    //   alert("please fill the fields")
+    // }
+    // else{
+    //   alert("record updated successfully")
+    //   router.push(`/jobs`)
+    // }
+    try {
+      const check = await axios.put(
+        `https://bbuttshopjob.herokuapp.com/post/63c1d744ac421a216d8ef7d7`,
+        formData,
+        config
+      );
+      console.log(check);
+      // navigate("/session-timed-out");
+      // console.log(sendForm);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
+  const router = useRouter();
   // const {id} = useParams()
   const JWTtoken = window.localStorage.getItem("JWTtoken");
   const config = {
@@ -94,29 +95,26 @@ async function update() {
       Authorization: `Bearer ${JWTtoken}`,
     },
   };
-  const [dataa,setDataa] = useState('')
- 
-  const deleteuser = (id) => {
+  const [dataa, setDataa] = useState("");
 
+  const deleteuser = (id) => {
     axios
 
-      .delete(`http://localhost:5000/post/${id}`,config)
+      .delete(`https://bbuttshopjob.herokuapp.com/post/${id}`, config)
 
-      .then(response => {
-        setDataa(response.data.id)
-        console.log("deleted successfully!")
-        alert("deleted successfully!")
-
-      })
-
-  }
+      .then((response) => {
+        setDataa(response.data.id);
+        console.log("deleted successfully!");
+        alert("deleted successfully!");
+      });
+  };
   useEffect(() => {
-    getData()
+    getData();
   }, [deleteuser]);
 
   const [data, setData] = useState([]);
   function getData() {
-    axios.get("http://localhost:5000/myposts", config).then((res) => {
+    axios.get("https://bbuttshopjob.herokuapp.com/myposts", config).then((res) => {
       console.log(res.data);
       setData(res.data);
     });
@@ -130,8 +128,6 @@ async function update() {
       {data.map((eachdata) => {
         return (
           <>
-       
-
             <Card
               sx={{
                 px: 2,
@@ -139,8 +135,7 @@ async function update() {
                 borderColor: (theme) => theme.palette.action.focus,
                 boxShadow: (theme) => theme.shadows[0],
               }}
-              >
-        
+            >
               <CardHeader
                 action={
                   <IconButton aria-label="settings">
@@ -205,9 +200,7 @@ async function update() {
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography sx={{ color: "primary.dark" }}>
-                     {eachdata.description}
-                    </Typography>
+                    <Typography sx={{ color: "primary.dark" }}>{eachdata.description}</Typography>
                   </Grid>
                 </Grid>
               </CardContent>
@@ -224,20 +217,28 @@ async function update() {
                     src={`http://localhost:5000/${eachdata.postimg}`}
                   /> */}
                   <CardMedia
-        component="img"
-        height="254"
-        image={
-         `http://localhost:5000/${eachdata.postimg}`
-        }
-        alt={shopname}
-      />
+                    component="img"
+                    height="254"
+                    image={`https://bbuttshopjob.herokuapp.com/${eachdata.postimg}`}
+                    alt={shopname}
+                  />
                 </Box>
               </CardMedia>
               <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button sx={{ textTransform: "uppercase" }}>applications</Button>
-                <Button sx={{ textTransform: "uppercase" }} onClick={()=>router.push(`/Update/${eachdata._id}`)}>Update</Button>
-               
-               <Button sx={{ textTransform: "uppercase" }} onClick={()=>deleteuser(eachdata._id)}>Delete</Button>
+                <Button
+                  sx={{ textTransform: "uppercase" }}
+                  onClick={() => router.push(`/Update/${eachdata._id}`)}
+                >
+                  Update
+                </Button>
+
+                <Button
+                  sx={{ textTransform: "uppercase" }}
+                  onClick={() => deleteuser(eachdata._id)}
+                >
+                  Delete
+                </Button>
               </CardActions>
             </Card>
           </>

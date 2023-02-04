@@ -19,10 +19,10 @@ function Page() {
   const JWTtoken = window.localStorage.getItem("JWTtoken");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-  
+
   async function getAllPosts() {
     try {
-      const response = await fetch("http://localhost:5000/posts", {
+      const response = await fetch("https://bbuttshopjob.herokuapp.com/posts", {
         method: "GET",
         mode: "cors",
         cache: "no-cache",

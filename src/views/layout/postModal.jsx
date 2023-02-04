@@ -25,7 +25,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   width: "85%",
-  height:"100vh",
+  height: "100vh",
   maxWidth: "1020px",
   overflowY: "auto",
   boxShadow: 24,
@@ -47,37 +47,31 @@ export default function JobPostModal({ open, handleClose }) {
   const [experience, setexperience] = useState("");
   const [description, setdescription] = useState("");
   const JWTtoken = window.localStorage.getItem("JWTtoken");
-  const formData = new FormData()
-  formData.append("postimg",postimg)
-  formData.append("jobname",jobname)
-  formData.append("shopname",shopname)
-  formData.append("shoploc",shoploc)
-  formData.append("workersReq",workersReq)
-  formData.append("salary",salary)
-  formData.append("timing",timing)
-  formData.append("description",description)
-  formData.append("age",age)
-
+  const formData = new FormData();
+  formData.append("postimg", postimg);
+  formData.append("jobname", jobname);
+  formData.append("shopname", shopname);
+  formData.append("shoploc", shoploc);
+  formData.append("workersReq", workersReq);
+  formData.append("salary", salary);
+  formData.append("timing", timing);
+  formData.append("description", description);
+  formData.append("age", age);
 
   // const navigate = useNavigate();
   async function editUserDetails() {
-    if(!postimg||!jobname||!shopname||!shoploc||!workersReq||!salary||!timing)
-{
-  alert("all fields required")
-}
+    if (!postimg || !jobname || !shopname || !shoploc || !workersReq || !salary || !timing) {
+      alert("all fields required");
+    }
     try {
-      const check = await axios.post(
-        "http://localhost:5000/postjob",
-     formData,
-        {
-          headers: {
-            Authorization: `Bearer ${JWTtoken}`,
-          },
+      const check = await axios.post("https://bbuttshopjob.herokuapp.com/postjob", formData, {
+        headers: {
+          Authorization: `Bearer ${JWTtoken}`,
         },
-        );
-        console.log(check)
-        alert("job posted successfully")
-        router.push(`/my_posts`)
+      });
+      console.log(check);
+      alert("job posted successfully");
+      router.push(`/my_posts`);
       // navigate("/session-timed-out");
       // console.log(sendForm);
     } catch (error) {
@@ -113,7 +107,7 @@ export default function JobPostModal({ open, handleClose }) {
                 fullWidth
               />
             </Grid>
-            
+
             <Grid item xs={12} md={6}>
               <TextField
                 id="outlined-basic"

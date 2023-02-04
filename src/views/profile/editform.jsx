@@ -1,24 +1,38 @@
 import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import Head from "next/head";
-
+import { useRouter } from "next/router";
 import Avatar from "@mui/material/Avatar";
 // import { Box,   Grid } from "@mui/material";
 // mui imports
-import { Box, Button, Grid, InputLabel, Stack, TextField, Card,CardContent,Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  InputLabel,
+  Stack,
+  TextField,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+} from "@mui/material";
 // import { useEffect } from "react";
 import DateInput from "../../components/common/menu/dateInput";
 import dayjs from "dayjs";
-
+const stringify = require("json-stringify-safe");
 // custom inputs
 
 const EdithtmlForm = () => {
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [qualification, setQualification] = useState("");
   const [userimg, setuserimg] = useState("");
+  const [id, setid] = useState("");
   const [dob, setDob] = useState();
 
   useEffect(() => {
@@ -31,12 +45,18 @@ const EdithtmlForm = () => {
     setAddress(_doc.address);
     setQualification(_doc.qualification);
     setuserimg(_doc.userimg);
+    setid(_doc._id);
     setDob(dob);
     // moment().format("MMMM Do YYYY, h:mm:ss a");
   }, []);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("data")) || {});
 
+  const handleUpdate = (newValue) => {
+    const updatedData = { ...data, field: newValue };
+    setData(updatedData);
+    localStorage.setItem("data", stringify(updatedData));
+  };
   return (
-    
     <Box>
       <Container maxWidth="xl">
         <Card sx={{ p: 4 }}>
@@ -46,7 +66,7 @@ const EdithtmlForm = () => {
               position: "relative",
               borderTopLeftRadius: 24,
               borderTopRightRadius: 24,
-              backgroundImage:`url(http://localhost:5000/${userimg})`,
+              backgroundImage: `url(https://bbuttshopjob.herokuapp.com/${userimg})`,
               backgroundPosition: "top left",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -66,21 +86,17 @@ const EdithtmlForm = () => {
                 },
               }}
             >
-            <img src={`http://localhost:5000/${userimg}`} alt="" />
+              <img src={`https://bbuttshopjob.herokuapp.com/${userimg}`} alt="" />
             </Avatar>
             {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
           </Box>
           <CardContent>
-            <Box sx={{ mt: 12 }}>
-              {/* <EditForm />/ */}
-            </Box>
+            <Box sx={{ mt: 12 }}>{/* <EditForm />/ */}</Box>
           </CardContent>
         </Card>
       </Container>
       <Grid container spacing={6}>
-        
         <Grid item xs={12}>
-        
           <Stack
             direction={{ sm: "row" }}
             spacing={2}
@@ -94,12 +110,11 @@ const EdithtmlForm = () => {
             </Typography>
             <Button variant="contained" component="label" sx={{ order: 1 }}>
               Upload File
-              
               {/* <input type="file" value={userimg} /> */}
             </Button>
           </Stack>
         </Grid>
-        
+
         <Grid item xs={12}>
           <Grid container>
             <Grid item xs={12} md={4} sx={{ alignSelf: "center" }}>
@@ -138,7 +153,7 @@ const EdithtmlForm = () => {
           <Grid container>
             <Grid item xs={12} md={4} sx={{ alignSelf: "center" }}>
               <InputLabel htmlFor="email" sx={{ fontSize: "20px" }}>
-                Email
+                Email:
               </InputLabel>
             </Grid>
             <Grid item xs={12} md={8}>
@@ -146,7 +161,7 @@ const EdithtmlForm = () => {
                 fullWidth
                 id="email"
                 type="email"
-                value={email}
+                value={name}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
@@ -213,8 +228,9 @@ const EdithtmlForm = () => {
         <Grid item xs={12}>
           <Stack direction="row" spacing={2} sx={{ justifyContent: "flex-end" }}>
             <Button variant="outlined">Cancel</Button>
-            <Button variant="contained">Save</Button>
-            
+            <Button variant="contained" onClick={handleUpdate}>
+              Save
+            </Button>
           </Stack>
         </Grid>
       </Grid>

@@ -2,14 +2,35 @@ import Head from "next/head";
 
 import Avatar from "@mui/material/Avatar";
 import { Box, Card, CardContent, Container, Grid } from "@mui/material";
-
-// custom imports
+import axios from "axios";
+// // custom imports
 import { Layout } from "../../components/layout";
+import { useState, useEffect } from "react";
 import EditForm from "../../views/profile/editform";
 
-const Page = () => (
-  <>
-    <Head>
+const Page = () => {
+  const JWTtoken = window.localStorage.getItem("JWTtoken");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${JWTtoken}`,
+    },
+  };
+
+  // const [data, setData] = useState([]);
+  // function getData() {
+  //   axios.get("http://localhost:5000/myuser", config).then((res) => {
+  //     console.log(res.data);
+  //     setData(res.data);
+  //   });
+  // }
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+  return (
+    <>
+      <EditForm />
+
+      {/* <Head>
       <title>Products | ShopJOB</title>
     </Head>
     <Box
@@ -21,7 +42,7 @@ const Page = () => (
     >
       <Container maxWidth="xl">
          {/* <Card sx={{ p: 4 }}> */}
-         {/* <Box
+      {/* <Box
             sx={{
               minHeight: "40vh",
               position: "relative",
@@ -34,7 +55,7 @@ const Page = () => (
               backgroundRepeat: "no-repeat",
             }}
           > */}
-            {/* <Avatar
+      {/* <Avatar
               sx={{
                 height: 120,
                 width: 120,
@@ -50,19 +71,19 @@ const Page = () => (
             >
               H
             </Avatar> */}
-            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
-          {/* </Box> */}
-          <CardContent>
+      {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+      {/* </Box> */}
+      {/* <CardContent>
             <Box sx={{ mt: 12 }}>
               <EditForm />
             </Box>
           </CardContent>
         {/* </Card>//</Box> */}
-      </Container>
-    </Box>
-  </>
-);
-
+      {/* </Container> */}
+      {/* // </Box> */}
+    </>
+  );
+};
 Page.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Page;
